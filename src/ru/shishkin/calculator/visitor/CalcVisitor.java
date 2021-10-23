@@ -18,13 +18,13 @@ public class CalcVisitor implements TokenVisitor {
 
     @Override
     public void visit(Brace token) {
-        throw new RuntimeException("unexpected token");
+        throw new RuntimeException("Unexpected token");
     }
 
     @Override
     public void visit(Operation token) {
         if (stack.size() < 2) {
-            throw new RuntimeException("no operands for executing operation");
+            throw new RuntimeException("No operands for executing operation");
         }
         int second = stack.pollLast();
         int first = stack.pollLast();
@@ -33,7 +33,7 @@ public class CalcVisitor implements TokenVisitor {
 
     public int getResult() {
         if (stack.size() != 1) {
-            throw new RuntimeException("count of elements is not 1");
+            throw new RuntimeException("Count of elements is not 1");
         }
         return stack.pollLast();
     }

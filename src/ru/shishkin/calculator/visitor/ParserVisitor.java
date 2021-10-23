@@ -6,7 +6,7 @@ import ru.shishkin.calculator.token.Number;
 import java.util.*;
 
 public class ParserVisitor implements TokenVisitor {
-    private List<Token> result = new ArrayList<>();
+    private final List<Token> result = new ArrayList<>();
     private final Deque<Token> stack = new ArrayDeque<>();
 
     @Override
@@ -23,7 +23,7 @@ public class ParserVisitor implements TokenVisitor {
                 result.add(stack.pollLast());
             }
             if (stack.isEmpty()) {
-                throw new RuntimeException("wrong brackets");
+                throw new RuntimeException("Wrong brackets");
             } else {
                 stack.pollLast();
             }
@@ -42,13 +42,17 @@ public class ParserVisitor implements TokenVisitor {
 
     public void finish() {
         while (!stack.isEmpty()) {
+            if (!(stack.peekLast() instanceof Operation)) {
+                throw new RuntimeException("Not only operations left in stack");
+            }
             result.add(stack.pollLast());
         }
     }
 
     public List<Token> getResult() {
-        List<Token> res = result;
-        result = new ArrayList<>();
-        return res;
+        if (!stack.isEmpty()) {
+            throw new RuntimeException("Stack is not empty");
+        }
+        return result;
     }
 }

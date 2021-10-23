@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class PrintVisitor implements TokenVisitor {
-    private OutputStream stream;
+    private final OutputStream stream;
 
     public PrintVisitor(OutputStream stream) {
         this.stream = stream;
@@ -20,7 +20,7 @@ public class PrintVisitor implements TokenVisitor {
         try {
             stream.write(token.toString().getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
-            throw new RuntimeException("error while printing output");
+            throw new RuntimeException("Error while printing output");
         }
     }
 

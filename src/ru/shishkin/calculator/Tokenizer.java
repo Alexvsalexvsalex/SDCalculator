@@ -64,13 +64,13 @@ public class Tokenizer {
                 }
             }
             case ERROR: {
-                throw new RuntimeException("error state of tokenizer");
+                throw new RuntimeException("Error state of tokenizer");
             }
             case END: {
                 return null;
             }
             default: {
-                throw new RuntimeException("unknown state of tokenizer");
+                throw new RuntimeException("Unknown state of tokenizer");
             }
         }
     }
